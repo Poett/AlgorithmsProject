@@ -23,9 +23,14 @@ public class WebPage implements Comparable<WebPage> {
 	}
 	
 	
-	public void addSource(String mySource, int rank)
+	public boolean addSource(String mySource, int rank)
 	{
-		sourceRanks.put(mySource, rank);
+		boolean sourceExists = sourceRanks.containsKey(mySource);
+		if(!sourceExists)
+			sourceRanks.put(mySource, rank);
+		
+		return !sourceExists;
+		
 	}
 
 	
