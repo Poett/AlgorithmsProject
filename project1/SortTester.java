@@ -7,10 +7,13 @@ public class SortTester {
 	public static void main(String[] args) {
 		SorterADT<String> sorter = new ArraySorterADT<>();
 		SorterADT<Integer> sorter2 = new ArraySorterADT<>();
+		SorterADT<WebPage> sorter3 = new ArraySorterADT<>();
+		
 		ArrayList<String> arr = new ArrayList<>();
 		ArrayList<Integer> intArr = new ArrayList<>();
-		//ArraySorterADT<Object> sorter2 = new ArraySorterADT<>(); -> bound mismatch
+		ArrayList<WebPage> pageArr = new ArrayList<>();
 		
+		//ArraySorterADT<Object> sorter2 = new ArraySorterADT<>(); -> bound mismatch
 		intArr.add(1);
 		intArr.add(1);
 		intArr.add(2);
@@ -18,7 +21,9 @@ public class SortTester {
 		intArr.add(2);
 		intArr.add(3);
 		
-		
+		for(int i = 0; i<6;i++) {
+			pageArr.add(new WebPage(pageArr.size(), i));
+		}
 		
 		arr.add("Z");
 		arr.add("B5");
@@ -29,6 +34,8 @@ public class SortTester {
 		arr.add("G");
 		arr.add("A");
 		
+		
+		System.out.println("List of pages: "+pageArr);
 		System.out.println("Expect unsorted array\t\t: "+arr);
 		System.out.println(sorter +"?\t\t: " + sorter.isSorted(arr));
 		sorter.sort(arr);
@@ -42,6 +49,8 @@ public class SortTester {
 		
 		System.out.println("Expect array of integers\t: " +intArr);
 		System.out.println(sorter2 +"?\t\t: " + sorter2.isSorted(intArr));
+		
+		System.out.println(sorter3+"?\t\t: " + sorter3.isSorted(pageArr));
 		
 		
 	}
