@@ -1,56 +1,51 @@
 package project1;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SortTester {
 
 	public static void main(String[] args) {
-		SorterADT<String> sorter = new ArraySorterADT<>();
-		SorterADT<Integer> sorter2 = new ArraySorterADT<>();
-		SorterADT<WebPage> sorter3 = new ArraySorterADT<>();
-		
-		ArrayList<String> arr = new ArrayList<>();
-		ArrayList<Integer> intArr = new ArrayList<>();
-		ArrayList<WebPage> pageArr = new ArrayList<>();
+		//SorterADT<WebPage> sorter = new ArraySorterADT<>();
+
+		ArrayList<WebPage> pageArr1 = new ArrayList<>();
+		ArrayList<WebPage> pageArr2 = new ArrayList<>();
+		ArrayList<WebPage> pageArr3 = new ArrayList<>();
+		ArrayList<WebPage> pageArr4 = new ArrayList<>();
+		ArrayList<WebPage> pageArr5 = new ArrayList<>();
+		//ArrayList<WebPage> pageArrCombined = new ArrayList<>();
 		
 		//ArraySorterADT<Object> sorter2 = new ArraySorterADT<>(); -> bound mismatch
-		intArr.add(1);
-		intArr.add(1);
-		intArr.add(2);
-		intArr.add(2);
-		intArr.add(2);
-		intArr.add(3);
 		
 		for(int i = 0; i<6;i++) {
-			pageArr.add(new WebPage(pageArr.size(), i));
+			pageArr1.add(new WebPage(pageArr1.size(), i));
+		}
+		for(int i = 0; i<6; i++) {
+			pageArr2.add(new WebPage(pageArr2.size(), 2*i));
+		}
+		for(int i = 0; i<6; i++) {
+			pageArr3.add(new WebPage(pageArr2.size(), 3*i));
+		}
+		for(int i = 0; i<6; i++) {
+			pageArr4.add(new WebPage(pageArr2.size(), 4*i));
+		}
+		for(int i = 0; i<6; i++) {
+			pageArr5.add(new WebPage(pageArr2.size(), 5*i));
 		}
 		
-		arr.add("Z");
-		arr.add("B5");
-		arr.add("A1");
-		arr.add("1");
-		arr.add("E");
-		arr.add("D");
-		arr.add("G");
-		arr.add("A");
+		Iterator<WebPage> wp = pageArr1.iterator();
+		Iterator<WebPage> wp2 = pageArr1.iterator();
+		Iterator<WebPage> wp3 = pageArr1.iterator();
+		Iterator<WebPage> wp4 = pageArr1.iterator();
+		Iterator<WebPage> wp5 = pageArr1.iterator();
 		
 		
-		System.out.println("List of pages: "+pageArr);
-		System.out.println("Expect unsorted array\t\t: "+arr);
-		System.out.println(sorter +"?\t\t: " + sorter.isSorted(arr));
-		sorter.sort(arr);
-		System.out.println("Expect sorted array(asc)\t: "+arr);
-		System.out.println(sorter +"?\t\t: " +sorter.isSorted(arr));
-		sorter.setDescending();
-		System.out.println(sorter +"?\t: " +sorter.isSorted(arr));
-		sorter.sort(arr);
-		System.out.println("Expect sorted array(desc)\t: "+arr);
-		System.out.println(sorter +"?\t: " + sorter.isSorted(arr));
-		
-		System.out.println("Expect array of integers\t: " +intArr);
-		System.out.println(sorter2 +"?\t\t: " + sorter2.isSorted(intArr));
-		
-		System.out.println(sorter3+"?\t\t: " + sorter3.isSorted(pageArr));
+		System.out.println("Page list 1:" +pageArr1);
+		System.out.println("Page list 2:" +pageArr2);
+		System.out.println("Page list 3:" +pageArr3);
+		System.out.println("Page list 4:" +pageArr4);
+		System.out.println("Page list 5:" +pageArr5);
+		System.out.println();
 		
 		
 	}
