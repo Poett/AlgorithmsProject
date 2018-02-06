@@ -1,53 +1,54 @@
 package project1;
+import java.util.HashMap;
 
 public class WebPage implements Comparable<WebPage> {
-	private int rank;
-	private int page_number;
-	
-	WebPage(int index, int r)
-	{
-		page_number = index;
-		rank = r;
-	}
+	private HashMap<String,Integer> sourceRanks;
+	private int pageNumber;
 	
 	WebPage()
 	{
-		this(0,0);
+		this(0);
 	}
 	
-	public int getPage()
+	
+	boolean isEmpty()
 	{
-		return page_number;
+		return sourceRanks.isEmpty();
 	}
 	
-	public int getRank()
+	
+	WebPage(int num)
 	{
-		return rank;
+		pageNumber = num;
 	}
 	
-	public int compareTo(WebPage w) {
-		return page_number-w.getPage();
-	}
 	
-	public void add(int r)
+	public void addSource(String mySource, int rank)
 	{
-		rank+= r;
+		sourceRanks.put(mySource, rank);
+	}
+
+	
+	public int compareTo(WebPage rhs) {
+			return getCombinedRank()-rhs.getCombinedRank();
 	}
 	
-	public boolean add(WebPage wp)
-	{
-		if(this.compareTo(wp)==0)
-		{
-			rank += wp.getRank();
+	
+	public int getPageNumber() {
+		return pageNumber;
+	}
+	
+	
+	public int getCombinedRank() {
+		return 0;
+	}
+	
+	public boolean setRank(String source, int rank) {
+		if(sourceRanks.containsKey(source)) {
+			sourceRanks.put(source,rank);
 			return true;
 		}
 		else return false;
 	}
 	
-	
-	public String toString()
-	{
-		return "Page " + getPage()+": "+getRank();
-	}
-
 }
