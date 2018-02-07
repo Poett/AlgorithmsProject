@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class SortTester {
 
 	public static void main(String[] args) {
-		//SorterADT<WebPage> sorter = new ArraySorterADT<>();
+		SorterADT<WebPage> sorter = new ArraySorterADT<>();
 
 		ArrayList<WebPage> pageArr = new ArrayList<>();
 		ArrayList<String> myfiles = new ArrayList<>();
@@ -53,6 +53,10 @@ public class SortTester {
 		
 		l.printAllPages();
 
+		
+		sorter.sort(l.getPageArray());
+		
+		l.printAllPages();
 	}
 
 }

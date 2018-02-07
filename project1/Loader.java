@@ -73,7 +73,8 @@ public class Loader {
 	}
 	
 	public void printAllPages() {
-		System.out.println(pages);
+		for(WebPage wp:pages)
+			System.out.println(wp);
 	}
 	
 	public void addPages(int numOfPages) {

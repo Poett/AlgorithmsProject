@@ -6,6 +6,8 @@ import java.util.Map;
 public class WebPage implements Comparable<WebPage> {
 	private Map<String,Integer> sourceRanks;
 	private int pageNumber;
+	private static String sourceID;
+	private static boolean combinedMode;
 	
 	WebPage()
 	{
@@ -23,6 +25,7 @@ public class WebPage implements Comparable<WebPage> {
 	{
 		sourceRanks = new LinkedHashMap<String,Integer>();
 		pageNumber = num;
+		combinedMode=true;
 	}
 	
 	
@@ -32,9 +35,29 @@ public class WebPage implements Comparable<WebPage> {
 		
 	}
 
+	public int getValue(String source) {
+		return sourceRanks.get(source);
+	}
 	
 	public int compareTo(WebPage rhs) {
+		if(combinedMode)
 			return getCombinedRank()-rhs.getCombinedRank();
+		else
+			return this.getValue(sourceID)-rhs.getValue(sourceID);
+	}
+	
+	public static void compareByCombinedRank(boolean comb) {
+		combinedMode = comb;
+	}
+	
+	public int comparator()
+	{
+		return 0;
+	}
+	
+	public static void setComparator(String source)
+	{
+		sourceID = source;
 	}
 	
 	
@@ -57,7 +80,7 @@ public class WebPage implements Comparable<WebPage> {
 	
 	public String toString()
 	{
-		return "page: "+pageNumber+" Combined rank: "+getCombinedRank();
+		return "page:\t "+pageNumber+"\t Combined rank:\t "+getCombinedRank();
 	}
 	
 }

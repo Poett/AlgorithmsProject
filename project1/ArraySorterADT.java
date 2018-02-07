@@ -9,7 +9,7 @@ public class ArraySorterADT<T extends Comparable<? super T>> implements SorterAD
 	//Data
 	/*
 	 * SortType is a constant String that holds the type of sort(merge,quick,etc) being used. Used in toString
-	 * isAscending is used as a switch for the
+	 * isAscending is used as a switch for the sorting order
 	 */
 	private static final String SortType = "Default sort";
 	private boolean isAscending;
