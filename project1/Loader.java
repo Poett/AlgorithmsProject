@@ -18,27 +18,41 @@ public class Loader {
 	}
 	
 	
+
+	public void loadAll(String myFiles[]) {
+		for(String file : myFiles)
+			load(file);
+		
+	}
+	
+	
 	/*
-	 * Load function for an array of integer ranks. Source is defined by its position in the text.
+	 * Load function for an array of integer ranks. Page is defined by its position in the text.
 	 */
 	public void load(String myFile) {
-		scanner = new Scanner(myFile);
-		int i = 0;
-		int j = 0;
-		String source;
 		
+		int i = 0;
+
 		while(scanner.hasNext()) {
-			pages.add(new WebPage());
-			
-			source = "Source" + i;
-			
-			pages.get(i).addSource(source, scanner.nextInt());
-			
-			
+			try {
+				pages.get(i).addSource(myFile, scanner.nextInt());
+			} catch (IndexOutOfBoundsException e) {
+				pages.add(new WebPage(i));
+				pages.get(i).addSource(myFile, scanner.nextInt());
+			}
+				
+			i++;
 		}
 		
 		
 		scanner.close();
+	}
+	
+	public void addPages(int numOfPages) {
+		
+		for(int i = 0; i < numOfPages; i++) {
+			pages.add(new WebPage(i));
+		}
 	}
 	
 
