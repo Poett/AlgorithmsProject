@@ -32,7 +32,7 @@ public class Loader {
 			
 			source = "Source" + i;
 			
-			pages.get(i).addSource();
+			pages.get(i).addSource(source, scanner.nextInt());
 			
 			
 		}
