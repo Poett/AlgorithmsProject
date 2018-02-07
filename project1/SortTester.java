@@ -17,21 +17,7 @@ public class SortTester {
 		
 		//ArraySorterADT<Object> sorter2 = new ArraySorterADT<>(); -> bound mismatch
 		
-		for(int i = 0; i<6;i++) {
-			pageArr1.add(new WebPage(pageArr1.size(), i));
-		}
-		for(int i = 0; i<6; i++) {
-			pageArr2.add(new WebPage(pageArr2.size(), 2*i));
-		}
-		for(int i = 0; i<6; i++) {
-			pageArr3.add(new WebPage(pageArr2.size(), 3*i));
-		}
-		for(int i = 0; i<6; i++) {
-			pageArr4.add(new WebPage(pageArr2.size(), 4*i));
-		}
-		for(int i = 0; i<6; i++) {
-			pageArr5.add(new WebPage(pageArr2.size(), 5*i));
-		}
+		//broke adding of web pages, will fix soon :)
 		
 		Iterator<WebPage> wp = pageArr1.iterator();
 		Iterator<WebPage> wp2 = pageArr1.iterator();
