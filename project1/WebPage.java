@@ -1,8 +1,10 @@
 package project1;
-import java.util.HashMap;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class WebPage implements Comparable<WebPage> {
-	private HashMap<String,Integer> sourceRanks;
+	private Map<String,Integer> sourceRanks;
 	private int pageNumber;
 	
 	WebPage()
@@ -19,17 +21,14 @@ public class WebPage implements Comparable<WebPage> {
 	
 	WebPage(int num)
 	{
+		sourceRanks = new LinkedHashMap<String,Integer>();
 		pageNumber = num;
 	}
 	
 	
-	public boolean addSource(String mySource, int rank)
+	public void addSource(String mySource, int rank)
 	{
-		boolean sourceExists = sourceRanks.containsKey(mySource);
-		if(!sourceExists)
-			sourceRanks.put(mySource, rank);
-		
-		return !sourceExists;
+		sourceRanks.putIfAbsent(mySource, rank);
 		
 	}
 
@@ -48,12 +47,13 @@ public class WebPage implements Comparable<WebPage> {
 		return 0;
 	}
 	
-	public boolean setRank(String source, int rank) {
-		if(sourceRanks.containsKey(source)) {
-			sourceRanks.put(source,rank);
-			return true;
-		}
-		else return false;
+	public void setRank(String source, Integer rank) {
+		sourceRanks.put(source, rank);
+	}
+	
+	public String toString()
+	{
+		return "page: "+pageNumber+" "+sourceRanks;
 	}
 	
 }

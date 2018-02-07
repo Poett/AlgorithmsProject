@@ -1,12 +1,14 @@
 package project1;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Loader {
-	ArrayList<WebPage> pages;
-	String filename;
-	Scanner scanner;
+	private ArrayList<WebPage> pages;
+	private String filename;
+	private Scanner scanner;
 	
 	
 	
@@ -19,9 +21,11 @@ public class Loader {
 	
 	
 
-	public void loadAll(String myFiles[]) {
-		for(String file : myFiles)
-			load(file);
+	public void loadAll(ArrayList<String> myFiles) throws FileNotFoundException {
+		for(String f : myFiles)
+		{
+			load(f);
+		}
 		
 	}
 	
@@ -29,16 +33,29 @@ public class Loader {
 	/*
 	 * Load function for an array of integer ranks. Page is defined by its position in the text.
 	 */
-	public void load(String myFile) {
+	public void load(String filename) throws FileNotFoundException {
 		
+		load(new File(filename));
+		
+		
+	}
+	
+	public void load(File myFile) throws FileNotFoundException {
+		
+		scanner = new Scanner(myFile);		//set Scanner to parse myFile for ints
 		int i = 0;
-
+		int j = 0;
 		while(scanner.hasNext()) {
+			j = Integer.parseInt(scanner.nextLine());
 			try {
-				pages.get(i).addSource(myFile, scanner.nextInt());
+				
+				pages.get(i).setRank(myFile.getName(), j);
+				
 			} catch (IndexOutOfBoundsException e) {
+					
 				pages.add(new WebPage(i));
-				pages.get(i).addSource(myFile, scanner.nextInt());
+				pages.get(i).setRank(myFile.getName(),j);
+			
 			}
 				
 			i++;
@@ -46,6 +63,13 @@ public class Loader {
 		
 		
 		scanner.close();
+	}
+	public void setFileName(String myFile) {
+		filename = myFile;
+	}
+	
+	public void viewPage(int p) {
+		System.out.println(pages.get(p));
 	}
 	
 	public void addPages(int numOfPages) {
