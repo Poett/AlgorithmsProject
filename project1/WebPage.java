@@ -44,7 +44,11 @@ public class WebPage implements Comparable<WebPage> {
 	
 	
 	public int getCombinedRank() {
-		return 0;
+		
+		int comb = 0;
+		for(int val:sourceRanks.values())
+			comb+=val;
+		return comb;
 	}
 	
 	public void setRank(String source, Integer rank) {
@@ -53,7 +57,7 @@ public class WebPage implements Comparable<WebPage> {
 	
 	public String toString()
 	{
-		return "page: "+pageNumber+" "+sourceRanks;
+		return "page: "+pageNumber+" Combined rank: "+getCombinedRank();
 	}
 	
 }

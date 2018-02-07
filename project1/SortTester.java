@@ -51,8 +51,7 @@ public class SortTester {
 			e.printStackTrace();
 		}
 		
-		for(int i = 0; i<10; i++)
-			l.viewPage(i);
+		l.printAllPages();
 
 	}
 

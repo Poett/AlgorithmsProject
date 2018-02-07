@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Loader {
 	private ArrayList<WebPage> pages;
-	private String filename;
 	private Scanner scanner;
 	
 	
@@ -15,7 +14,6 @@ public class Loader {
 	//Methods
 	Loader(){
 		pages = new ArrayList<WebPage>();
-		filename = "";
 		
 	}
 	
@@ -64,12 +62,18 @@ public class Loader {
 		
 		scanner.close();
 	}
-	public void setFileName(String myFile) {
-		filename = myFile;
+	public ArrayList<WebPage> getPageArray()
+	{
+		return pages;
+		
 	}
 	
-	public void viewPage(int p) {
+	public void printPage(int p) {
 		System.out.println(pages.get(p));
+	}
+	
+	public void printAllPages() {
+		System.out.println(pages);
 	}
 	
 	public void addPages(int numOfPages) {
