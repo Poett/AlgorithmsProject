@@ -6,6 +6,12 @@ public class QuickSorter<T extends Comparable<? super T>> extends ArraySorterADT
 
 	
 	public int sort(ArrayList<T> arr) {
+		
+		//If array has only 1 or 0 elements, break and return 0;
+		if(arr.size() <= 1) {
+			return 0;
+		}
+		
 		int inversions = 0;
 		T pivot = arr.get(0);
 		ArrayList<T> lessThan = new ArrayList<T>();
@@ -41,8 +47,8 @@ public class QuickSorter<T extends Comparable<? super T>> extends ArraySorterADT
 		}
 		
 		//combining
-		sort(lessThan);
-		sort(greaterThan);
+		inversions = inversions + sort(lessThan);
+		inversions = inversions + sort(greaterThan);
 
 		lessThan.addAll(equals);
 		lessThan.addAll(greaterThan);

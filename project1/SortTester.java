@@ -57,6 +57,24 @@ public class SortTester {
 		sorter.sort(l.getPageArray());
 		
 		l.printAllPages();
+		
+		
+		//Finding Inversions, creates array of Integers holding inversions for each source in myFile array
+		ArrayList<Integer> myInversions = new ArrayList<>();
+		sorter = new QuickSorter<>();
+		for(String source : myfiles) {
+			myInversions.add(findInversions(source, sorter, l));
+		}
+		
+		System.out.println(myInversions);
+		
 	}
 
+	
+	public static int findInversions(String source, SorterADT<WebPage> sorter, Loader l) {
+		WebPage.compareByCombinedRank(false);
+		WebPage.setComparator(source);
+		return sorter.sort(l.getPageArray());
+		
+	}
 }
