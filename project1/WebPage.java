@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class WebPage implements Comparable<WebPage> {
 	private Map<String,Integer> sourceRanks;
+	private Map<String,Double> sourceWeights;
 	private int pageNumber;
 	private static String sourceID;
 	private static boolean combinedMode;
@@ -12,26 +13,43 @@ public class WebPage implements Comparable<WebPage> {
 	WebPage()
 	{
 		this(0);
-	}
-	
-	
-	boolean isEmpty()
-	{
-		return sourceRanks.isEmpty();
+		
 	}
 	
 	
 	WebPage(int num)
 	{
 		sourceRanks = new LinkedHashMap<String,Integer>();
+		sourceWeights = new LinkedHashMap<String,Double>();
 		pageNumber = num;
 		combinedMode=true;
+		
 	}
 	
+	boolean isEmpty()
+	{
+		return sourceRanks.isEmpty();
+		
+		
+		
+	}
 	
+	public void setWeights( Map<String,Double> weights)
+	{
+		if(weights.keySet().equals(sourceWeights.keySet())) {
+			sourceWeights = weights;
+		}
+		
+	}
 	public void addSource(String mySource, int rank)
 	{
+		double numSources;
 		sourceRanks.putIfAbsent(mySource, rank);
+		numSources = sourceRanks.size();
+		
+		for(String src: sourceRanks.keySet()) {
+			sourceWeights.put(src, 1.0/numSources);
+		}
 		
 	}
 
@@ -66,16 +84,23 @@ public class WebPage implements Comparable<WebPage> {
 	}
 	
 	
-	public int getCombinedRank() {
-		
-		int comb = 0;
-		for(int val:sourceRanks.values())
-			comb+=val;
-		return comb;
+	public int getCombinedRank() {		//combined rank = weights(initially 1/no_of_sources)*rank from source
+										//this definition lets us change weights by altering sourceWeights
+		double comb = 0;
+		for(String source:sourceWeights.keySet())
+		{
+			comb+= sourceWeights.get(source)*sourceRanks.get(source);
+			
+		}
+		return ((int)comb);
 	}
 	
 	public void setRank(String source, Integer rank) {
-		sourceRanks.put(source, rank);
+		if(!sourceRanks.containsKey(source)) {
+			addSource(source,rank);
+		}
+		else
+			sourceRanks.put(source, rank);
 	}
 	
 	public String toString()

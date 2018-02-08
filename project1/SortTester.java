@@ -1,6 +1,7 @@
 package project1;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -66,7 +67,20 @@ public class SortTester {
 			myInversions.add(findInversions(source, sorter, l));
 		}
 		
-		System.out.println(myInversions);
+		double totalInversions = 0;
+		DecimalFormat df = new DecimalFormat("#.0000");
+		
+		for(int i:myInversions) {
+			
+			System.out.println(i);
+			totalInversions+=i;
+			
+		}
+		for(int i:myInversions) {
+			System.out.println(df.format(i/totalInversions));
+		}
+		
+		
 		
 	}
 
