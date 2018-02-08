@@ -34,6 +34,10 @@ public class WebPage implements Comparable<WebPage> {
 		
 	}
 	
+	public Map<String,Double> getWeights() {
+		return sourceWeights;
+	}
+	
 	public void setWeights( Map<String,Double> weights)
 	{
 		if(weights.keySet().equals(sourceWeights.keySet())) {
@@ -107,5 +111,8 @@ public class WebPage implements Comparable<WebPage> {
 	{
 		return "page:\t "+pageNumber+"\t Combined rank:\t "+getCombinedRank();
 	}
+
+
+
 	
 }
