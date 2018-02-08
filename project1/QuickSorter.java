@@ -50,9 +50,11 @@ public class QuickSorter<T extends Comparable<? super T>> extends ArraySorterADT
 		inversions = inversions + sort(lessThan);
 		inversions = inversions + sort(greaterThan);
 
-		lessThan.addAll(equals);
-		lessThan.addAll(greaterThan);
-		arr = lessThan;
+
+		arr.clear();
+		arr.addAll(lessThan);
+		arr.addAll(equals);
+		arr.addAll(greaterThan);
 		
 		return inversions;
 	}

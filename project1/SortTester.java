@@ -42,8 +42,8 @@ public class SortTester {
 		//		pageArr.get(1).addSource(source3, 6);
 		//		pageArr.get(1).addSource(source4, 2);
 
-		System.out.println(pageArr.get(0));
-		System.out.println(pageArr.get(1));
+		//		System.out.println(pageArr.get(0));
+		//		System.out.println(pageArr.get(1));
 
 		Loader l = new Loader();
 		try {
@@ -53,16 +53,15 @@ public class SortTester {
 		}
 
 		
-		SorterADT<WebPage> sorter = new QuickSorter<>();
-		
-		sortPages(sorter, l, myfiles);
-		l.printAllPages();
-		
-		sortPages(sorter, l, myfiles);
 		System.out.println(l.getPageArray().get(0).getWeights());
-		//Finding Inversions, creates array of Integers holding inversions for each source in myFile array
 
-		
+		SorterADT<WebPage> sorter = new QuickSorter<>();
+
+		//Runs sorter a handful of times to approach final weight
+		for(int i = 0; i < 10; i++) {
+			sortPages(sorter, l, myfiles);
+			System.out.println(l.getPageArray().get(0).getWeights());
+		}
 
 
 	}
@@ -75,8 +74,8 @@ public class SortTester {
 
 	}
 
-	
-	
+
+
 	public static void sortPages(SorterADT<WebPage> sorter, Loader l, ArrayList<String> myFiles) {
 
 		//Declarations, gets ready to sort an array of webpages by combined rank
@@ -89,7 +88,7 @@ public class SortTester {
 		//For each source, add an inversions count by calling findInversions method
 		double totalInversions = 0;
 		int inversions = 0;
-		
+
 		for(String source : myFiles) {
 			inversions = findInversions(source, sorter, l) + 1; //adds 1 in case there are no inversions
 			myInversions.add(inversions);
