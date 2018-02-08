@@ -71,6 +71,7 @@ public class SortTester {
 		WebPage.compareByCombinedRank(false);
 		WebPage.setComparator(source);
 		return sorter.sort(l.getPageArray());
+		WebPage.compareByCombinedRank(true);
 
 	}
 
@@ -108,6 +109,7 @@ public class SortTester {
 		for(WebPage pg : l.getPageArray()) {
 			pg.setWeights(sourceWeights);
 		}
-
+		
+		
 	}
 }
