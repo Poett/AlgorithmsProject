@@ -68,11 +68,15 @@ public class SortTester {
 
 
 	public static int findInversions(String source, SorterADT<WebPage> sorter, Loader l) {
+		//Alters WebPage comparison to compare according to source's value
 		WebPage.compareByCombinedRank(false);
 		WebPage.setComparator(source);
+		//Copies loader's list to sort separately to find inversions without changing loader's list.
 		ArrayList<WebPage> list = new ArrayList<WebPage>(l.getPageArray());
+		int inversions = sorter.sort(list);
+		//Reverts back WebPage's comparator
 		WebPage.compareByCombinedRank(true);
-		return sorter.sort(list);
+		return inversions;
 
 	}
 
