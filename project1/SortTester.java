@@ -70,8 +70,9 @@ public class SortTester {
 	public static int findInversions(String source, SorterADT<WebPage> sorter, Loader l) {
 		WebPage.compareByCombinedRank(false);
 		WebPage.setComparator(source);
-		return sorter.sort(l.getPageArray());
+		ArrayList<WebPage> list = new ArrayList<WebPage>(l.getPageArray());
 		WebPage.compareByCombinedRank(true);
+		return sorter.sort(list);
 
 	}
 
