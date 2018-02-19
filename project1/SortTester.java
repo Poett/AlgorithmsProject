@@ -55,7 +55,7 @@ public class SortTester {
 		
 		System.out.println(l.getPageArray().get(0).getWeights());
 
-		SorterADT<WebPage> sorter = new QuickSorter<>();
+		SorterADT<WebPage> sorter = new MergeSorter<>();
 
 		//Runs sorter a handful of times to approach final weight
 		for(int i = 0; i < 10; i++) {
@@ -101,6 +101,10 @@ public class SortTester {
 			totalInversions += inversions;
 		}
 
+		
+		System.out.println(myInversions);
+		
+		
 		//Calculates weights based on previous inversions
 		Map<String,Double> sourceWeights = new LinkedHashMap<String,Double>();
 		for(int i = 0; i < myInversions.size(); i++) {
