@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class MergeSorter<T extends Comparable<? super T>> extends ArraySorterADT<T> {
 	
+	private static final String SortType = "Merge Sort";
+	
 	public int sort(ArrayList<T> arr) {
 		return sort(arr, 0, arr.size()-1);
 		
@@ -31,7 +33,7 @@ public class MergeSorter<T extends Comparable<? super T>> extends ArraySorterADT
 		return 0;
 	}
 	
-	public int merge(ArrayList<T> arr, int l, int m, int r) {
+	private int merge(ArrayList<T> arr, int l, int m, int r) {
 		
 		int mark1 = m - l + 1;
 		int mark2 = r - m;

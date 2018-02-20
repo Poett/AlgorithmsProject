@@ -34,21 +34,23 @@ public class SortTester {
 		}
 
 		
-		//Default weights
-		Map<String,Double> sourceWeights = l.getPageArray().get(0).getWeights();
-		
-		
 		//Sorter (can switch between new MergeSorter, QuickSorter, InserstionSorter)
 		SorterADT<WebPage> sorter = new MergeSorter<>();
+		final long startTime = System.currentTimeMillis();
 
 		//Runs sorter a handful of times to approach final weight
-		for(int i = 0; i < 20; i++) {
+		for(int i = 1; i <= 19; i++) {
+			System.out.println("Loop " + i + ": ");
+			System.out.println("Inversions:");
 			sortPages(sorter, l, myfiles);
+			System.out.println("Weights:");
+			System.out.println(l.getPageArray().get(0).getWeights());
 		}
-
+		
+		final long endTime = System.currentTimeMillis() - startTime;
 		System.out.println("Final Weights: ");
 		System.out.println(l.getPageArray().get(0).getWeights());
-
+		System.out.println("Sorting Time: " + endTime);
 		
 		
 		
@@ -57,7 +59,7 @@ public class SortTester {
 	}
 
 
-	public static int findInversions(String source, SorterADT<WebPage> sorter, Loader l) {
+	private static int findInversions(String source, SorterADT<WebPage> sorter, Loader l) {
 		//Alters WebPage comparison to compare according to source's value
 		WebPage.compareByCombinedRank(false);
 		WebPage.setComparator(source);
@@ -72,7 +74,7 @@ public class SortTester {
 
 
 
-	public static void sortPages(SorterADT<WebPage> sorter, Loader l, ArrayList<String> myFiles) {
+	private static void sortPages(SorterADT<WebPage> sorter, Loader l, ArrayList<String> myFiles) {
 
 		//Declarations, gets ready to sort an array of webpages by combined rank
 		ArrayList<Double> myReliabilities = new ArrayList<>();
@@ -90,6 +92,7 @@ public class SortTester {
 		for(String source : myFiles) {
 			//Inversions
 			inversions = findInversions(source, sorter, l); //adds 1 in case there are no inversions
+			System.out.println(source + ": " + inversions);
 			
 			//Reliability
 			reliability = 1.0/((double)inversions + 1.0);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class InsertionSorter<T extends Comparable<? super T>> extends ArraySorterADT<T> {
 
+	private static final String SortType = "Insertion Sort";
 	
 	public int sort(ArrayList<T> arr) {
 		int inversions = 0;

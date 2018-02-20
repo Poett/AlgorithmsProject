@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class QuickSorter<T extends Comparable<? super T>> extends ArraySorterADT<T> {
 
+	private static final String SortType = "Quick Sort";
 	
 	public int sort(ArrayList<T> arr) {
 		
@@ -50,11 +51,28 @@ public class QuickSorter<T extends Comparable<? super T>> extends ArraySorterADT
 		inversions = inversions + sort(lessThan);
 		inversions = inversions + sort(greaterThan);
 
+		
 
-		arr.clear();
-		arr.addAll(lessThan);
-		arr.addAll(equals);
-		arr.addAll(greaterThan);
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		
+		for(int i = 0; i < arr.size();i++) {
+			if (x < lessThan.size()) {
+				arr.set(i, lessThan.get(x));
+				x++;
+			}
+			else if(y < equals.size()) {
+				arr.set(i, equals.get(y));
+				y++;
+			}
+			else {
+				arr.set(i, greaterThan.get(z));
+				z++;
+			}
+		}
+		
+		
 		
 		return inversions;
 	}
