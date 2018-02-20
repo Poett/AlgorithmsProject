@@ -1,8 +1,7 @@
 package project1;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,12 +9,9 @@ import java.util.Map;
 public class SortTester {
 
 	public static void main(String[] args) {
-		ArrayList<WebPage> pageArr = new ArrayList<>();
+		//Sets the sources
 		ArrayList<String> myfiles = new ArrayList<>();
-		//ArrayList<WebPage> pageArrCombined = new ArrayList<>();
-
-
-		//broke adding of web pages, will fix soon :)
+		
 
 		String source1 = "source1.txt";
 		String source2 = "source2.txt";
@@ -29,22 +25,7 @@ public class SortTester {
 		myfiles.add(source4);
 		myfiles.add(source5);
 
-		pageArr.add(new WebPage(1));
-		pageArr.add(new WebPage(2));
-
-		//		pageArr.get(0).addSource(source1, 5);
-		//		pageArr.get(0).addSource(source2, 10);
-		//		pageArr.get(0).addSource(source3, 7);
-		//		pageArr.get(0).addSource(source4, 3);
-		//		
-		//		pageArr.get(1).addSource(source1, 3);
-		//		pageArr.get(1).addSource(source2, 40);
-		//		pageArr.get(1).addSource(source3, 6);
-		//		pageArr.get(1).addSource(source4, 2);
-
-		//		System.out.println(pageArr.get(0));
-		//		System.out.println(pageArr.get(1));
-
+		//Loads the files into a loader
 		Loader l = new Loader();
 		try {
 			l.loadAll(myfiles);
@@ -53,15 +34,24 @@ public class SortTester {
 		}
 
 		
-		System.out.println(l.getPageArray().get(0).getWeights());
-
+		//Default weights
+		Map<String,Double> sourceWeights = l.getPageArray().get(0).getWeights();
+		
+		
+		//Sorter (can switch between new MergeSorter, QuickSorter, InserstionSorter)
 		SorterADT<WebPage> sorter = new MergeSorter<>();
 
 		//Runs sorter a handful of times to approach final weight
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 20; i++) {
 			sortPages(sorter, l, myfiles);
-			System.out.println(l.getPageArray().get(0).getWeights());
 		}
+
+		System.out.println("Final Weights: ");
+		System.out.println(l.getPageArray().get(0).getWeights());
+
+		
+		
+		
 
 
 	}
@@ -85,30 +75,36 @@ public class SortTester {
 	public static void sortPages(SorterADT<WebPage> sorter, Loader l, ArrayList<String> myFiles) {
 
 		//Declarations, gets ready to sort an array of webpages by combined rank
-		ArrayList<Integer> myInversions = new ArrayList<>();
+		ArrayList<Double> myReliabilities = new ArrayList<>();
+		
 		WebPage.compareByCombinedRank(true);
 
 		//Sorts by combined rank using a QuickSorter
 		sorter.sort(l.getPageArray());
 
 		//For each source, add an inversions count by calling findInversions method
-		double totalInversions = 0;
 		int inversions = 0;
+		double reliability;
+		double totalReliability = 0.0;
 
 		for(String source : myFiles) {
-			inversions = findInversions(source, sorter, l) + 1; //adds 1 in case there are no inversions
-			myInversions.add(inversions);
-			totalInversions += inversions;
+			//Inversions
+			inversions = findInversions(source, sorter, l); //adds 1 in case there are no inversions
+			
+			//Reliability
+			reliability = 1.0/((double)inversions + 1.0);
+			myReliabilities.add(reliability);
+			totalReliability += reliability;
+			
+			
 		}
 
-		
-		System.out.println(myInversions);
 		
 		
 		//Calculates weights based on previous inversions
 		Map<String,Double> sourceWeights = new LinkedHashMap<String,Double>();
-		for(int i = 0; i < myInversions.size(); i++) {
-			double weight = myInversions.get(i)/totalInversions;
+		for(int i = 0; i < myReliabilities.size(); i++) {
+			double weight = (myReliabilities.get(i) * 5.0)/(totalReliability);
 
 			sourceWeights.put(myFiles.get(i), weight);
 
